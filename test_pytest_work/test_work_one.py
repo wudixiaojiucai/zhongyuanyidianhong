@@ -1,42 +1,34 @@
 import pytest
-from pythoncode.calculator import Calculator
+from test_pytest_work.read_yaml import read_yaml
 
 
 class TestCalc:
+    add_data = read_yaml("./case_data.yaml")["add_data"]
+    sub_data = read_yaml("./case_data.yaml")["sub_data"]
+    mul_data = read_yaml("./case_data.yaml")["mul_data"]
+    div_data = read_yaml("./case_data.yaml")["div_data"]
+    case_name = read_yaml("./case_data.yaml")["ids"]
 
-    def setup_class(self):
-        self.calc = Calculator()
-
-    def setup_method(self):
-        print("开始计算")
-
-    def teardown_method(self):
-        print("计算结束")
-
-    @pytest.mark.parametrize("a,b,expect", [(3, 5, 8), (-1, -2, -3), (100, 300, 400)],
-                             ids=["first add", "second add", "third add"]
-                             )
-    def test_calc_add(self, a, b, expect):
+    @pytest.mark.parametrize("a,b,expect", add_data, ids=case_name)
+    def test_calc_add(self, auto_fixture, a, b, expect):
         """加法"""
-        assert expect == self.calc.add(a, b)
+        calc = auto_fixture
+        assert calc.add(a, b) == expect
 
-    @pytest.mark.parametrize("a,b,expect", [(5, 2, 3), (4, -2, 6), (400, 300, 100)],
-                             ids=["first sub", "second sub", "third sub"]
-                             )
-    def test_cale_sub(self, a, b, expect):
+    @pytest.mark.parametrize("a,b,expect", sub_data, ids=case_name)
+    def test_cale_sub(self, auto_fixture, a, b, expect):
         """减法"""
-        assert expect == self.calc.sub(a, b)
+        calc = auto_fixture
+        assert expect == calc.sub(a, b)
 
-    @pytest.mark.parametrize("a,b,expect", [(5, 2, 10), (4, -2, -8), (400, 300, 120000)],
-                             ids=["first mul", "second mul", "third mul"]
-                             )
-    def test_cale_mul(self, a, b, expect):
+    @pytest.mark.parametrize("a,b,expect", mul_data, ids=case_name)
+    def test_cale_mul(self, auto_fixture, a, b, expect):
         """乘法"""
-        assert expect == self.calc.mul(a, b)
+        calc = auto_fixture
+        assert expect == calc.mul(a, b)
 
-    @pytest.mark.parametrize("a,b,expect", [(6, 2, 3), (4, -2, -2), (400, 200, 2)],
-                             ids=["first div", "second div", "third div"]
-                             )
-    def test_cale_div(self, a, b, expect):
+    @pytest.mark.parametrize("a,b,expect", div_data, ids=case_name)
+    def test_cale_div(self, auto_fixture, a, b, expect):
         """除法"""
-        assert expect == self.calc.div(a, b)
+        calc = auto_fixture
+        assert expect == calc.div(a, b)
