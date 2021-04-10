@@ -14,7 +14,7 @@ class BaseApi:
         if corpid is None:
             corpid = "wwf455935108d79648"
         if corpsecret is None:
-            corpsecret = "tbLnjwlgSgaeiL8dKhXDE-_qGdpEJ3feP7yjO362b-c"
+            corpsecret = ""
         url = self.url + "/cgi-bin/gettoken"
         data = {"corpid": corpid,
                 "corpsecret": corpsecret}

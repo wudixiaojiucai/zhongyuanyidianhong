@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 api = Api(app)
@@ -50,7 +50,6 @@ class TestCaseServer(Resource):
         data = request.json
         if "id" in data:
             print(request.json)
-            # db.session.add(TestCase(id=2, name="heihei", description="嘿嘿", steps="{'dd':'123'}"))
             db.session.add(TestCase(id=data.get("id"), name=data.get("name"), description=data.get("description"),
                                     steps=data.get("steps")))
             db.session.commit()
