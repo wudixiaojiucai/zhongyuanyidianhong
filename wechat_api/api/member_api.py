@@ -3,7 +3,7 @@ from wechat_api.api.base_api import BaseApi
 
 class MemeberApi(BaseApi):
 
-    def add_member(self, userid="1111115", name="asaf", mobile="19923445555", department=[1]):
+    def add_member(self, userid="1111115", name="asaf1", mobile="19923445555", department=[1]):
         url = self.url + "/cgi-bin/user/create"
         data = {"userid": userid,
                 "name": name,
